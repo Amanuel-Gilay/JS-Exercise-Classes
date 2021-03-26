@@ -49,9 +49,14 @@ class Airplane {
 
    }
    eat(edible){
-     if(this.stomach.length < 10)
-     this.stomach.push(edible);
+    if(this.stomach.length < 10){
+      this.stomach.push(edible);
+    }
+      
    }
+     
+   
+  
    poop(){
      this.stomach = [];
    }
@@ -59,7 +64,7 @@ class Airplane {
      return `${this.name}, ${this.age}`
    }
     
-  }
+ }
   
   /*
     TASK 2
@@ -76,25 +81,25 @@ class Airplane {
   */
   
  class Car {
-   constructor(model,milesPerGallon){
-     this.model = this.model;
-     this.milesPerGallon = this.milesPerGallon;
+   constructor(model, milesPerGallon){
+     this.model = model;
+     this.milesPerGallon = milesPerGallon;
      this.odometer = 0;
      this.tank = 0;
-
    }
    fill(gallons){
      this.tank = this.tank + gallons;
    }
-   drive(dist){
+   drive(distance){
      const drivableMiles = this.tank * this.milesPerGallon;
-     if(dis <= drivableMiles){
-       this.odometer = this.odometer + dist;
-       this.tank = this.tank - (dist / this.milesPerGallon);
+
+     if(distance <= drivableMiles){
+       this.odometer = this.odometer + distance;
+       this.tank = this.tank - (distance / this.milesPerGallon);
      }else{
-       this.odometer = this.odometer + this.drivableMiles;
+       this.odometer = this.odometer + drivableMiles;
        this.tank = 0;
-       return `I ran out of fuel at ${this.odometer} miles`;
+       return `I ran out of fuel at ${this.odometer} miles!`;
      }
    }
     
@@ -115,8 +120,8 @@ class Airplane {
  class Lambdasian {
    constructor(attrs){
      this.name = attrs.name;
-     this.age = age;
-     this.location = location;
+     this.age = attrs.age;
+     this.location = attrs.location;
    }
     speak(){
       return `hello my name is ${this.name}, I am from ${this.location}`;
@@ -139,16 +144,17 @@ class Airplane {
   */
  class Instructor extends Lambdasian {
   constructor(thing){
+    super(thing);
     this.specialty = thing.specialty;
     this.favLanguage = thing.favLanguage;
-    thing.catchphrase = thing.catchphrase;
+    this.catchPhrase = thing.catchPhrase;
  
   }
  demo(subject){
    return `Today we are learning about ${subject}`;
  }
  grade(student,subject){
-   `${student.name} receives a perfect sore on ${subject}`;
+   return `${student.name} receives a perfect sore on ${subject}`;
  }
 
 }
@@ -169,6 +175,22 @@ class Airplane {
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
  class Student extends Lambdasian  {
+   constructor(attrs){
+     super(attrs);
+     this.previousBackground = attrs.previousBackground;
+     this.className = attrs.className;
+     this.favSubjects = attrs.favSubjects;
+   }
+   listSubjects(){
+     return `Loving ${this.favSubjects}`;
+   }
+   PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`
+  }
+   sprintChallenge(subject){
+     return `${this.name} has begun sprint challenge on ${subject}`;
+   }
+ }
   
   
   /*
@@ -184,7 +206,18 @@ class Airplane {
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
+ class ProjectManager extends Instructor {
+   constructor(attr){
+     super(attr);
+     this.gradClassName = attr.gradClassName;
+     this.favInstructor = attr.favInstructor;
+   }
+   standUp(channel){
+     return `${this.name} announces to ${channel}, @channel study times`;
+   }
+   debugsCode(student, subject){
+     return `${this.name} debugs ${student.name}'s code on ${subject}`;
+   }
      
  }
   /*
